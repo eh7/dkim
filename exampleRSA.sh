@@ -1,21 +1,21 @@
 # gen private key
-openssl genrsa -out ~/dkim/key.pem 2048
+openssl genrsa -out ./key.pem 2048
 
 # grn publiv key
-openssl rsa -in ~/dkim/key.pem -pubout > ~/dkim/key.pub
+openssl rsa -in ./key.pem -pubout > ./key.pub
 
 # sign some data
-#openssl dgst -sha256 -sign ~/dkim/key.pem -out ~/dkim/data.txt.signature ~/dkim/data.txt
-#openssl dgst -sign ~/dkim/key.pem -keyform PEM -sha256 -out ~/dkim/data.zip.sign -binary ~/dkim/data.zip
-openssl dgst -sign ~/dkim/key.pem -keyform PEM -sha256 -out ~/dkim/data.txt.sign ~/dkim/data.txt
+#openssl dgst -sha256 -sign ./key.pem -out ./data.txt.signature ./data.txt
+#openssl dgst -sign ./key.pem -keyform PEM -sha256 -out ./data.zip.sign -binary ./data.zip
+openssl dgst -sign ./key.pem -keyform PEM -sha256 -out ./data.txt.sign ./data.txt
 
 
 # verify signature
-#openssl dgst -verify ~/dkim/key.pub -keyform PEM -sha256 -signature ~/dkim/data.zip.sign -binary ~/dkim/data.zip
-openssl dgst -verify ~/dkim/key.pub -keyform PEM -sha256 -signature ~/dkim/data.txt.sign ~/dkim/data.txt
+#openssl dgst -verify ./key.pub -keyform PEM -sha256 -signature ./data.zip.sign -binary ./data.zip
+openssl dgst -verify ./key.pub -keyform PEM -sha256 -signature ./data.txt.sign ./data.txt
 
 
-#openssl rsa -in ~/dkim/key.pem -pubout > ~/dkim/key-verified.pub
+#openssl rsa -in ./key.pem -pubout > ./key-verified.pub
 
-#diff ~/dkim/key-verified.pub ~/dkim/key.pub
-#cat ~/dkim/key-verified.pub ~/dkim/key.pub
+#diff ./key-verified.pub ./key.pub
+#cat ./key-verified.pub ./key.pub
